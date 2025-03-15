@@ -6,6 +6,6 @@ import { UserModule } from 'src/user/user.module';
 @Module({
   controllers: [PostsController],
   providers: [PostsService],
-  imports:[UserModule]
+  imports: [UserModule],
 })
 export class PostsModule {}

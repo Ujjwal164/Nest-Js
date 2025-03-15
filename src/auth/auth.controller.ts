@@ -3,13 +3,10 @@ import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
-    constructor(
-        private readonly authservice:AuthService
-    ){}
+  constructor(private readonly authservice: AuthService) {}
 
-
-@Get('/:userId')
-checkUser(@Param('userId') param:string){
+  @Get('/:userId')
+  checkUser(@Param('userId') param: string) {
     return this.authservice.getAll(param);
-}
+  }
 }

@@ -5,20 +5,18 @@ import { PatchPostDto } from './dto/patch-post.dto';
 
 @Injectable()
 export class PostsService {
-    constructor(
-        private readonly userService:UserService
-    ){}
+  constructor(private readonly userService: UserService) {}
 
-    getAll(param){
-        const user = this.userService.getAll(param)
-        return user
-    }
+  getAll(param) {
+    const user = this.userService.getAll(param);
+    return user;
+  }
 
-    createPost(body:CreatePostDto){
-        return body
-    }
+  createPost(body: CreatePostDto) {
+    return body;
+  }
 
-    updatePost(patchPostDto:PatchPostDto){
-        return patchPostDto
-    }
+  updatePost(patchPostDto: PatchPostDto) {
+    return patchPostDto;
+  }
 }
