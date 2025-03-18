@@ -1,15 +1,22 @@
-ForwardRef:            basically we use this to remove the error we are getting while the circular dependecy is created
+ForwardRef:     ======       basically we use this to remove the error we are getting while the circular dependecy is created
 
-circular dependency:   so the ciscular dependecy is for example we ahve user and post module and we use user service in post module and post service in 
+circular dependency:  =======  so the ciscular dependecy is for example we ahve user and post module and we use user service in post module and post service in 
                            user module so the cicular dependecy is created to avaoid that we use this forward ref
 
-Type Orm:               So basically the type orm is one of the orm we ahve many other orm like prisma, mongoose, serilize and many more 
+Type Orm:     =======          So basically the type orm is one of the orm we ahve many other orm like prisma, mongoose, serilize and many more 
                         so basically orm is that supooser we want to create any user so instaed of writing sql command for that we use orm so basically its provide method which
                          we can use and we dont care how the sql will be managed we juts use that methods and method aare like create , find one , find and many more 
 
                          the entity we created in that we use one to one, one to mahy are also part of orm
-entity                  while creatig entity we ahve make  anamimg convention singular like user not users post not posts
+entity         =====         while creatig entity we ahve make  anamimg convention singular like user not users post not posts
                         enitty is the file that contain the column of the database
 
-Extends keyword         Suppose we have dto in that we have multiple property and we want to create a new dto but it also contain the same value that the other dto conatin but in this we want them to be optional
-                        so for that we can use extends it extend the property from the fisrt dto and mak ethem all optional                        
+Extends keyword    =====     Suppose we have dto in that we have multiple property and we want to create a new dto but it also contain the same value that the other dto conatin but in this we want them to be optional
+                        so for that we can use extends it extend the property from the fisrt dto and mak ethem all optional      
+
+
+
+Uni-directional and bi-directional relationship   ======   so basically when we are cretinga realtionshaip between 2 table so when only one table  know about the relationship so it it is unidirectional and when both table know that it is called bidirectional               
+
+
+eager ===== suppose we are getting post data and we want but we are not getting metaoptiosn but we want meta option also so we can creae relation but te other option is eager is equal to treu we can add thsi in our enityt sp we dont need to create relation now when we get post we alos get metaoptions

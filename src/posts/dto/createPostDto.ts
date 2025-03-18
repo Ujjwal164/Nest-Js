@@ -13,7 +13,7 @@ import {
 } from 'class-validator';
 import { PostType } from '../enums/postType.enum';
 import { StatusEnum } from '../enums/status.enum';
-import { CreateMetaOptionsDto } from './create-metaOptions.dto';
+import { CreateMetaOptionsDto } from '../../meta-option/dto/create-metaOptions.dto';
 import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
@@ -76,8 +76,8 @@ export class CreatePostDto {
 
   @ApiPropertyOptional({
     name: 'Schmea',
-    description: 'json object of the schema',
-    example: '',
+    description: 'JSON object of the schema',
+    example: '{}',
   })
   @IsJSON()
   @IsOptional()
@@ -95,14 +95,14 @@ export class CreatePostDto {
 
   @ApiProperty({
     name: 'Published On',
-    description: 'Time whn the post is published',
+    description: 'Time when the post is published',
     required: true,
     type: String,
     example: '2021-09-09T00:00:00.000Z',
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsISO8601()
-  publishedOn: string;
+  publishedOn?: string;
 
   @ApiPropertyOptional({
     name: 'tags',
@@ -120,27 +120,21 @@ export class CreatePostDto {
     description: 'meta options of the post',
     example:
       '[{"key":"key1","value":"value1"},{"key":"key2","value":"value2"}]',
-    type: 'array',
+    type: Object,
     required: false,
     items: {
       type: 'object',
       properties: {
-        key: {
-          type: 'string',
-          description: 'key of the meta option',
-          example: 'sidebarEnabled',
-        },
-        value: {
-          type: 'string',
-          description: 'value of the meta option',
-          example: 'true',
-        },
+        metValue: {
+          type: 'json',
+          description: 'metValue must be a json string',
+          example: '{"sidebarEnabled":true}',
+        }
       },
     },
   })
   @IsOptional()
-  @IsArray()
   @ValidateNested({ each: true }) // each:true means each element of the array should be validated
   @Type(() => CreateMetaOptionsDto) // this create a instance of the dto for each element of the array
-  metaOptions?: CreateMetaOptionsDto[]; // this is the nested object that contain key value pair
+  metaOptions?: CreateMetaOptionsDto; // this is the nested object that contain key value pair
 }

@@ -1,7 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { PostType } from './enums/postType.enum';
 import { StatusEnum } from './enums/status.enum';
-import { CreateMetaOptionsDto } from './dto/create-metaOptions.dto';
+import { MetaOption } from 'src/meta-option/metaOption.entity';
 
 @Entity()
 export class Post {
@@ -32,42 +32,46 @@ export class Post {
   @Column({
     type: 'enum',
     nullable: false,
+    enum:StatusEnum,
+    default:StatusEnum.DRAFT
   })
   status: StatusEnum;
 
   @Column({
     type: 'varchar',
-    nullable: false,
+    nullable: true,
   })
   content: string;
 
   @Column({
     type: 'varchar',
-    nullable: false,
+    nullable: true,
   })
   schema: string;
 
   @Column({
     type: 'varchar',
-    nullable: false,
+    nullable: true,
   })
   featuredImageUrl: string;
 
   @Column({
     type: 'varchar',
-    nullable: false,
+    nullable: true,
   })
   publishedOn: string;
+  
+  @OneToOne(()=> MetaOption ,{
+    cascade:true,  // by using cacade we dont need to declare the child entity seprately now afetr using cacade we dont need to firstv declare metaoption now we directly use post entitya nd save that 
+    eager:true
+  }) 
+  @JoinColumn()
+  metaOptions?: MetaOption;
 
   @Column({
     type: 'varchar',
-    nullable: false,
+    nullable: true,
   })
   tags: string[];
 
-  @Column({
-    type: 'varchar',
-    nullable: false,
-  })
-  metaOptions?: CreateMetaOptionsDto[];
 }
