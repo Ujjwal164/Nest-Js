@@ -7,6 +7,6 @@ export class AuthController {
 
   @Get('/:userId')
   checkUser(@Param('userId') param: string) {
-    return this.authservice.getAll(param);
+    return this.authservice.getAll(+param);
   }
 }

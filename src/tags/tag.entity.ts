@@ -37,14 +37,14 @@ export class Tag {
 
   @Column({
     type: 'text',
-    nullable: false,
+    nullable: true,
   })
   schema: string;
 
   @Column({
     type: 'varchar',
     nullable: true,
-    length: 1024
+    length: 1024,
   })
   featuredImageUrl: string;
 

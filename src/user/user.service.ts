@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { User } from './user.entity';
 import { UserBodyDto } from './dto/body.dto';
 import { Repository } from 'typeorm';
@@ -10,10 +10,11 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
-  getAll(param) {
-    return {
-      firstNmae: 'ujjwal',
-    };
+  getAll(id: number) {
+    return this.userRepository.find({
+      where: { id },
+      relations: { post: true },
+    });
   }
   async createUser(req: UserBodyDto) {
     const check = await this.userRepository.findOne({
@@ -27,5 +28,9 @@ export class UserService {
       const newUser = this.userRepository.create(req);
       return this.userRepository.save(newUser);
     }
+  }
+
+  async deleteUser(id: number) {
+    return await this.userRepository.delete(id);
   }
 }

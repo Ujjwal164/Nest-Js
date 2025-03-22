@@ -1,7 +1,18 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { PostType } from './enums/postType.enum';
 import { StatusEnum } from './enums/status.enum';
 import { MetaOption } from 'src/meta-option/metaOption.entity';
+import { User } from 'src/user/user.entity';
+import { Tag } from 'src/tags/tag.entity';
 
 @Entity()
 export class Post {
@@ -32,8 +43,8 @@ export class Post {
   @Column({
     type: 'enum',
     nullable: false,
-    enum:StatusEnum,
-    default:StatusEnum.DRAFT
+    enum: StatusEnum,
+    default: StatusEnum.DRAFT,
   })
   status: StatusEnum;
 
@@ -60,18 +71,18 @@ export class Post {
     nullable: true,
   })
   publishedOn: string;
-  
-  @OneToOne(()=> MetaOption ,{
-    cascade:true,  // by using cacade we dont need to declare the child entity seprately now afetr using cacade we dont need to firstv declare metaoption now we directly use post entitya nd save that 
-    eager:true
-  }) 
-  @JoinColumn()
+
+  @OneToOne(() => MetaOption, (metaOption) => metaOption.post, {
+    cascade: true, // by using cacade we dont need to declare the child entity seprately now afetr using cacade we dont need to firstv declare metaoption now we directly use post entitya nd save that
+    eager: true,
+  }) // here we added metaoption because thsi relatiosnhip is bidirectional so we ahve to define to whch thsi relationship is mapping
   metaOptions?: MetaOption;
 
-  @Column({
-    type: 'varchar',
-    nullable: true,
-  })
-  tags: string[];
+  @ManyToMany(() => Tag, { cascade: true })
+  @JoinTable()
+  tags: Tag[];
 
+  @ManyToOne(() => User, (user) => user.post, { onDelete: 'CASCADE' })
+  @JoinColumn()
+  user: User;
 }

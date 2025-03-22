@@ -20,3 +20,6 @@ Uni-directional and bi-directional relationship   ======   so basically when we 
 
 
 eager ===== suppose we are getting post data and we want but we are not getting metaoptiosn but we want meta option also so we can creae relation but te other option is eager is equal to treu we can add thsi in our enityt sp we dont need to create relation now when we get post we alos get metaoptions
+
+
+onDelete:cascade  =========  this thing is only work on foreign key and forein key meand where we add @Join column in bidirectional relationship so basiaccly suppose we ahve post and metaoptions adn e set froeing key in post eneuty so when i delete metaoptin the post also get deleted but when i set foreign key in metaoptiosn so when i deleet post the metoptiosnmalod got dleetd it depend where we have to put foeign key 

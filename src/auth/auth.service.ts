@@ -8,7 +8,7 @@ export class AuthService {
     private readonly userService: UserService,
   ) {}
 
-  getAll(param) {
+  getAll(param: number) {
     const checkUser = this.userService.getAll(param);
     return checkUser;
   }

@@ -1,6 +1,7 @@
 import {
   IsArray,
   IsEnum,
+  IsInt,
   IsISO8601,
   IsJSON,
   IsNotEmpty,
@@ -16,6 +17,7 @@ import { StatusEnum } from '../enums/status.enum';
 import { CreateMetaOptionsDto } from '../../meta-option/dto/create-metaOptions.dto';
 import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Tag } from 'src/tags/tag.entity';
 
 export class CreatePostDto {
   @ApiProperty({
@@ -111,9 +113,10 @@ export class CreatePostDto {
   })
   @IsArray()
   @IsOptional()
-  @IsString({ each: true }) // each:true means each element of the array should be string
-  @MinLength(1, { each: true }) // each:true means each element of the array should be validated
-  tags?: string[];
+  @IsInt()
+  // @IsString({ each: true }) // each:true means each element of the array should be string
+  // @MinLength(1, { each: true }) // each:true means each element of the array should be validated
+  tags?: Tag[];
 
   @ApiPropertyOptional({
     name: 'metaOptions',
@@ -129,7 +132,7 @@ export class CreatePostDto {
           type: 'json',
           description: 'metValue must be a json string',
           example: '{"sidebarEnabled":true}',
-        }
+        },
       },
     },
   })

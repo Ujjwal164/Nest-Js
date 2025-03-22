@@ -6,15 +6,18 @@ import { CreateMetaOptionsDto } from './dto/create-metaOptions.dto';
 
 @Injectable()
 export class MetaOptionService {
-    constructor(
+  constructor(
+    @InjectRepository(MetaOption)
+    private readonly MetaOptionRepository: Repository<MetaOption>,
+  ) {}
 
-        @InjectRepository(MetaOption)
-        private readonly MetaOptionRepository:Repository<MetaOption>
-    ){}
+  postMetaOption(req: CreateMetaOptionsDto) {
+    const metaOption = this.MetaOptionRepository.create(req);
+    return this.MetaOptionRepository.save(metaOption);
+  }
 
-    postMetaOption(req:CreateMetaOptionsDto){
-        const metaOption = this.MetaOptionRepository.create(req);
-        return this.MetaOptionRepository.save(metaOption)
-        
-    }
+  async deleteMeta(id: number) {
+    await this.MetaOptionRepository.delete(id);
+    return 'deleted succefully';
+  }
 }

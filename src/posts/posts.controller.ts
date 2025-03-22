@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreatePostDto } from './dto/createPostDto';
@@ -9,9 +18,9 @@ import { PatchPostDto } from './dto/patch-post.dto';
 export class PostsController {
   constructor(private readonly postService: PostsService) {}
 
-  @Get('{/:userId}')
-  get(@Param('userId') param: string) {
-    return this.postService.getAll(param);
+  @Get(':userId')
+  get(@Param('userId') userId: string) {
+    return this.postService.getAll(+userId);
   }
 
   @ApiOperation({ summary: 'Create a post' })
@@ -19,10 +28,9 @@ export class PostsController {
     status: 201,
     description: 'The post has been successfully created',
   })
-  
-  @Post('createPost')
-  createPost(@Body() req: CreatePostDto) {
-    return this.postService.createPost(req);
+  @Post(':userId')
+  createPost(@Param('userId') userId: string, @Body() req: CreatePostDto) {
+    return this.postService.createPost(req, +userId);
   }
 
   @Patch('updatePost/:postId')
