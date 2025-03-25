@@ -33,7 +33,7 @@ export class PostsController {
     return this.postService.createPost(req, +userId);
   }
 
-  @Patch('updatePost/:postId')
+  @Patch('updatePost')
   updatePost(@Body() patchPostDto: PatchPostDto) {
     return this.postService.updatePost(patchPostDto);
   }

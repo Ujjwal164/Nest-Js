@@ -17,7 +17,6 @@ import { StatusEnum } from '../enums/status.enum';
 import { CreateMetaOptionsDto } from '../../meta-option/dto/create-metaOptions.dto';
 import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Tag } from 'src/tags/tag.entity';
 
 export class CreatePostDto {
   @ApiProperty({
@@ -113,10 +112,10 @@ export class CreatePostDto {
   })
   @IsArray()
   @IsOptional()
-  @IsInt()
+  @IsInt({ each: true })
   // @IsString({ each: true }) // each:true means each element of the array should be string
   // @MinLength(1, { each: true }) // each:true means each element of the array should be validated
-  tags?: Tag[];
+  tags?: number[];
 
   @ApiPropertyOptional({
     name: 'metaOptions',

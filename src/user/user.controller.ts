@@ -14,7 +14,6 @@ export class UserController {
     summary: 'Get user registered on the application using their id',
   })
   getUser(@Param() param: UserParamDto) {
-    console.log(typeof param.id);
     const result = this.userService.getAll(+param.id);
     return result;
   }

@@ -78,8 +78,14 @@ export class Post {
   }) // here we added metaoption because thsi relatiosnhip is bidirectional so we ahve to define to whch thsi relationship is mapping
   metaOptions?: MetaOption;
 
-  @ManyToMany(() => Tag, { cascade: true })
-  @JoinTable()
+  @ManyToMany(() => Tag, (tag) => tag.post, {
+    cascade: true,
+    eager: true,
+    onDelete: 'CASCADE',
+  }) // in many to many when we create unidirectional relationship we dont need to do cascade true it automatically cascade the relationship
+  @JoinTable({
+    name: 'post_tag',
+  })
   tags: Tag[];
 
   @ManyToOne(() => User, (user) => user.post, { onDelete: 'CASCADE' })
