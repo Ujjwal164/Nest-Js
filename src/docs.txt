@@ -23,3 +23,15 @@ eager ===== suppose we are getting post data and we want but we are not getting 
 
 
 onDelete:cascade  =========  this thing is only work on foreign key and forein key meand where we add @Join column in bidirectional relationship so basiaccly suppose we ahve post and metaoptions adn e set froeing key in post eneuty so when i delete metaoptin the post also get deleted but when i set foreign key in metaoptiosn so when i deleet post the metoptiosnmalod got dleetd it depend where we have to put foeign key 
+
+
+nest js/common packages is used for http exception hanling
+
+
+to preform trsnaction in nest js we use query runner
+steps to crate transaction is first we ahve to crete query runner instanec
+ then connnect it to the datasource
+ start trsnactionif successful then commit of not than rollback
+ 
+
+
